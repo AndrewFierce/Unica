@@ -1,0 +1,47 @@
+{% extends "index_template.html" %}
+
+{% block menu %}
+	<li class="active"><a href="{% url 'index' %}">Home</a></li>
+	<li><a href="{% url 'about' %}">About Us</a></li>
+	<li><a href="#">Event</a></li>
+	<li><a href="{% url 'courses' %}">COURSES</a></li>
+	<li><a href="{% url 'posts' %}">blog</a></li>
+	<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock %}
+
+{% block container %}
+  {% for post in posts %}
+  <div class="col-xl-6">
+	<div class="blog-item">
+		<div class="blog-thumb set-bg" data-setbg="{{post.image.url}}"></div>
+		<div class="blog-content">
+			<h4>{{post.title}}</h4>
+			<div class="blog-meta">
+				<span><i class="fa fa-calendar-o"></i>{{post.modified_at}}</span>
+				<span><i class="fa fa-user"></i>{{post.author}}</span>
+			</div>
+			<p class="news-content">{{ post.summary|truncatechars_html:100|safe }}</p>
+		</div>
+		
+	</div>
+  </div>
+  {% endfor %}
+{% endblock %}
+
+{% block couses %}
+{% for course in courses %}
+<div class="col-lg-4 col-md-6 course-item">
+<div class="course-thumb">
+	<img src="{{course.image.url}}" alt="">
+	<div class="course-cat">
+		<span>{{course.get_course_display}}</span>
+	</div>
+</div>
+<div class="course-info">
+	<div class="date"><i class="fa fa-clock-o"></i>{{course.modified_at}}</div>
+	<h4>{{course.title}}</h4>
+	<h4 class="cource-price">${{course.priсe}}<span>/month</span></h4>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

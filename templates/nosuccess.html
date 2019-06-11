@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block menu %}
+	<li><a href="{% url 'index' %}">Home</a></li>
+	<li><a href="{% url 'about' %}">About Us</a></li>
+	<li><a href="#">Event</a></li>
+	<li class="active"><a href="{% url 'courses' %}">COURSES</a></li>
+	<li><a href="{% url 'posts' %}">blog</a></li>
+	<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock %}
+
+{% block containername %}
+	<span>Single Course</span>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-6 about-text">
+	<h5>Уважаемый, <b>{{name}}</b>!</h5>
+	<p>Подобное обращение уже было ранее зарегистрировано.<br>Спасибо!</p>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block menu %}
+	<li><a href="{% url 'index' %}">Home</a></li>
+	<li><a href="{% url 'about' %}">About Us</a></li>
+	<li><a href="#">Event</a></li>
+	<li class="active"><a href="{% url 'courses' %}">COURSES</a></li>
+	<li><a href="{% url 'posts' %}">blog</a></li>
+	<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock %}
+
+{% block containername %}
+	<span>Courses</span>
+{% endblock %}
+
+{% block content %}
+	{% for course in courses %}
+	<!-- course item -->
+	<div class="col-lg-4 col-md-6 course-item">
+		<div class="course-thumb">
+			<img src="{{course.image.url}}" alt="">
+			<div class="course-cat">
+				<a href="{{ course.get_absolute_url }}"><span>{{course.get_course_display}}</span></a>
+			</div>
+		</div>
+		<div class="course-info">
+			<div class="date"><i class="fa fa-clock-o"></i>{{course.modified_at}}</div>
+			<h4>{{course.title}}</h4>
+			<h4 class="cource-price">${{course.priсe}}<span>/month</span></h4>
+		</div>
+	</div>
+	{% endfor %}
+  <div class="text-center">
+	<ul class="site-pageination">
+		{% if is_paginated %}
+			<span class="page-links">
+			{% if page_obj.has_previous %}
+				<li class="active"><a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+			{% else %}
+      			<li class="disabled"><a href="#"><span>&laquo;</span></a></li>
+			{% endif %}
+			{% for i in page_obj.paginator.page_range %}
+				{% if page_obj.number == i %}
+					<li class="active"><a href="#"><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+				{% else %}
+					<li><a href="{{ request.path }}?page={{ i }}" class="active">{{ i }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if page_obj.has_next %}
+				<li class="active"><a href="{{ request.path }}?page={{ users.next_page_number }} " class="active">&raquo;</a></li>
+			{% else %}
+      			<li class="disabled" ><a href="#"><span>&raquo;</span></a></li>
+			{% endif %}
+			</span>
+		{% endif %}
+	</ul>
+  </div>
+  <!-- Trigger the modal with a button -->
+
+  <!-- <form class="comment-form" style="display:none">
+	<div class="row">
+		<div class="col-lg-4">
+			<input type="text" placeholder="Your Name">
+		</div>
+		<div class="col-lg-4">
+			<input type="text" placeholder="Your Email">
+		</div>
+		<div class="col-lg-4">
+			<input type="text" placeholder="Subject">
+		</div>
+		<div class="col-lg-12">
+			<textarea minlength="20" maxlength="500" placeholder="Message"></textarea>
+			<div class="text-center">
+				<button class="site-btn">SUBMIT</button>
+			</div>
+		</div>
+	</div>
+  </form> -->
+{% endblock %}

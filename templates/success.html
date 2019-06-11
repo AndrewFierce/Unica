@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block menu %}
+	<li><a href="{% url 'index' %}">Home</a></li>
+	<li><a href="{% url 'about' %}">About Us</a></li>
+	<li><a href="#">Event</a></li>
+	<li class="active"><a href="{% url 'courses' %}">COURSES</a></li>
+	<li><a href="{% url 'posts' %}">blog</a></li>
+	<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock %}
+
+{% block containername %}
+	<span>Single Course</span>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-6 about-text">
+	<h5>Спасибо за обращение!</h5>
+	<p>Уважаемый, <b>{{name}}</b>! Ваше сообщение было отправлено в нашу поддержку.<br>После обработки сообщения мы с Вами свяжемся для дальнейшего сотрудничества! Если Вы еще не подтвердили Ваш почтовый ящик, то сделайте это как можно скорее.</p>
+</div>
+{% endblock %}
